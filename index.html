@@ -419,7 +419,7 @@
 
         <div style="text-align: center; margin-top: 40px; color: #666">
           <p>
-            <strong>Project Timeline:</strong> 6 Major Milestones (Jul 2025 -
+            <strong>Project Timeline:</strong> 7 Major Milestones (Jul 2025 -
             Mar 2026) | <strong>Critical Path:</strong> Approvals → Architecture
             → Implementation → Optimization | <strong>Duration:</strong> ~8
             months
@@ -436,63 +436,26 @@
           title: "Plan for new Journey with standardized UX",
           requiresApproval: true,
           startDate: "2025-07-22",
-          endDate: "2025-08-08",
-          owner: "Frontend Architecture Team",
+          endDate: "2025-09-12",
           tasks: [
             {
               title: "First steps",
-              owner: "Senior Frontend Developer",
+              owner: "Abdul",
               items: [
                 {
                   text: "Create new journey POC",
                   completed: true,
-                  owner: "Alex Chen",
+                  owner: "Abdul",
                 },
                 {
                   text: "Document the new journey framework",
-                  completed: false,
-                  owner: "Sarah Johnson",
+                  completed: true,
+                  owner: "Abdul",
                 },
                 {
                   text: "Present and get feedback on the new approach",
-                  completed: false,
-                  owner: "Mike Rodriguez",
-                },
-                {
-                  text: "Finalize and create the new journey",
-                  completed: false,
-                  owner: "Frontend Architecture Team",
-                },
-              ],
-            },
-            {
-              title: "Other unknowns",
-              owner: "Product Team Lead",
-              items: [
-                {
-                  text: "How to restrict access to commercial banking features for business users?",
-                  completed: false,
-                  owner: "Security Team",
-                },
-                {
-                  text: "For new RFFs should we implement in both repos?",
-                  completed: false,
-                  owner: "DevOps Lead",
-                },
-                {
-                  text: "Deprecation process for old journeys",
-                  completed: false,
-                  owner: "Product Manager",
-                },
-                {
-                  text: "Dual journey maintenance plan",
-                  completed: false,
-                  owner: "Tech Lead",
-                },
-                {
-                  text: "Should we publish before 1.0.0?",
-                  completed: false,
-                  owner: "Release Manager",
+                  completed: true,
+                  owner: "Abdul",
                 },
               ],
             },
@@ -505,33 +468,37 @@
           id: 2,
           title: "New Journey Creation",
           requiresApproval: false,
-          startDate: "2025-08-16",
-          endDate: "2025-08-22",
-          owner: "Frontend Development Team",
+          startDate: "2025-09-15",
+          endDate: "2025-10-01",
           tasks: [
             {
               title: "Journey Development",
-              owner: "Lead Frontend Developer",
+              owner: "Sridevi",
               items: [
+                {
+                  text: "Make changes in workflows to skip checks in new journey",
+                  completed: false,
+                  owner: "Abdul",
+                },
+                {
+                  text: "Finalize and create the new journey",
+                  completed: false,
+                  owner: "Sridevi",
+                },
                 {
                   text: "Implement journey framework with all 3 segments and routing",
                   completed: false,
-                  owner: "Emma Wilson",
-                },
-                {
-                  text: "Implement for a simple page like detail page (mock data)",
-                  completed: false,
-                  owner: "David Park",
+                  owner: "Sridevi",
                 },
                 {
                   text: "Test manually and verify, passing segment in routing is changing the views",
                   completed: false,
-                  owner: "QA Team",
+                  owner: "Sridevi",
                 },
                 {
-                  text: "Find and fix edge cases",
+                  text: "Create accounts table component",
                   completed: false,
-                  owner: "Frontend Team",
+                  owner: "Subbu",
                 },
               ],
             },
@@ -540,9 +507,9 @@
               owner: "QA Engineer",
               items: [
                 {
-                  text: "Create testing framework, and write segment specific tests for the detail page",
+                  text: "Configure jest for unit testing the new journey",
                   completed: false,
-                  owner: "Lisa Thompson",
+                  owner: "Sridevi",
                 },
               ],
             },
@@ -553,20 +520,40 @@
         },
         {
           id: 3,
-          title: "Configuration Implementation",
+          title: "Feature development",
           requiresApproval: false,
           startDate: "2025-10-01",
           endDate: "2025-10-31",
-          owner: "UX/Frontend Team",
           tasks: [
             {
-              title: "Config Creation",
-              owner: "Configuration Specialist",
+              title: "Component creation",
+              owner: "Subbu",
               items: [
                 {
-                  text: "Go through the designs and create configurations for each segment",
+                  text: "Create hierarchy view component",
                   completed: false,
-                  owner: "Frontend Team & Gio (UX)",
+                  owner: "Subbu",
+                },
+                {
+                  text: "Get the layout working with hierarchy tree and accounts table",
+                  completed: false,
+                  owner: "Subbu",
+                },
+                {
+                  text: "Create filtering and search component",
+                  completed: false,
+                  owner: "Abdul",
+                },
+              ],
+            },
+            {
+              title: "Component Architecture",
+              owner: "Subbu",
+              items: [
+                {
+                  text: "Check the feasibility of dynamic components",
+                  completed: false,
+                  owner: "Subbu",
                 },
               ],
             },
@@ -578,121 +565,86 @@
         },
         {
           id: 4,
-          title: "Architecture Deep Dive",
-          requiresApproval: true,
+          title: "State management & Scroll behavior",
+          requiresApproval: false,
           startDate: "2025-11-01",
-          endDate: "2025-12-15",
-          owner: "Principal Engineers",
+          endDate: "2025-11-30",
           tasks: [
             {
-              title: "System Design",
+              title: "Working with mock data",
               owner: "System Architect",
               items: [
                 {
-                  text: "State management",
+                  text: "Make filter and search work with mock data",
                   completed: false,
-                  owner: "React Specialist",
+                  owner: "Sridevi",
                 },
                 {
-                  text: "Caching strategy",
+                  text: "On click of any node in hierarchy tree, right side should scroll to that table",
                   completed: false,
-                  owner: "Performance Engineer",
+                  owner: "Subbu",
                 },
                 {
-                  text: "Performance optimization (Lazy loading etc.)",
+                  text: "Create ngrx state management for the new journey",
                   completed: false,
-                  owner: "Performance Team",
+                  owner: "Abdul",
                 },
                 {
-                  text: "Scalability framework (non-invasive component extension etc.)",
+                  text: "On click on view all accounts, and user clears filter, scroll to the same legal entity",
                   completed: false,
-                  owner: "Architecture Team",
-                },
-                {
-                  text: "Route guards and access control",
-                  completed: false,
-                  owner: "Security Engineer",
-                },
-              ],
-            },
-            {
-              title: "Component Architecture",
-              owner: "UI/UX Developer",
-              items: [
-                {
-                  text: "Create a list of new components required to support commercial view",
-                  completed: false,
-                  owner: "Component Library Team",
-                },
-                {
-                  text: "Which libraries or styling approaches will be used for each component?",
-                  completed: false,
-                  owner: "Design System Team",
-                },
-                {
-                  text: "Location of the component (Design System vs Our journey)",
-                  completed: false,
-                  owner: "Architecture Review Board",
+                  owner: "Abdul",
                 },
               ],
             },
           ],
-          dependencies: [
-            "Principal Approval: Frontend system design and component architecture decisions",
-          ],
+          dependencies: ["No dependencies"],
         },
         {
           id: 5,
           title: "Pagination & Data Strategy",
           requiresApproval: false,
-          startDate: "2025-12-16",
-          endDate: "2026-01-31",
-          owner: "Backend Integration Team",
+          startDate: "2025-12-01",
+          endDate: "2025-12-31",
           tasks: [
             {
               title: "Pagination Implementation",
-              owner: "API Integration Lead",
+              owner: "Subbu",
               items: [
                 {
-                  text: "Finalize all the different APIs needed for each page",
+                  text: "Use correct APIs for and mock data for each scenario",
                   completed: false,
-                  owner: "Backend Team Lead",
+                  owner: "Subbu",
                 },
                 {
-                  text: "Collect mock json for each API",
+                  text: "Check if each API calls are passed with the expected body and parameters",
                   completed: false,
-                  owner: "API Designer",
+                  owner: "Sridevi",
                 },
                 {
-                  text: "Define pagination behavior",
+                  text: "Write test cases for the same",
                   completed: false,
-                  owner: "Frontend Lead",
+                  owner: "Sridevi",
+                },
+                {
+                  text: "Test pagination and infinite scroll with mock data",
+                  completed: false,
+                  owner: "Subbu",
                 },
               ],
             },
             {
-              title: "Data Requirements",
-              owner: "Data Engineer",
+              title: "Caching stratergy & Real-time data",
+              owner: "Abdul",
               items: [
                 {
-                  text: "APIs called for each minor action",
+                  text: "Check if we need caching behavior for any of the APIs",
                   completed: false,
-                  owner: "Backend Developer",
+                  owner: "Abdul",
                 },
                 {
-                  text: "Caching requirements",
+                  text: "If yes, create a caching strategy document",
                   completed: false,
-                  owner: "Performance Engineer",
-                },
-                {
-                  text: "Real-time data sync strategy",
-                  completed: false,
-                  owner: "WebSocket Specialist",
-                },
-                {
-                  text: "Error handling and fallbacks",
-                  completed: false,
-                  owner: "Reliability Engineer",
+                  owner: "Abdul",
                 },
               ],
             },
@@ -704,64 +656,65 @@
         },
         {
           id: 6,
-          title: "POC & Optimization",
+          title: "Write Playwright tests",
           requiresApproval: false,
-          startDate: "2026-02-01",
-          endDate: "2026-03-31",
-          owner: "Full Stack Team",
+          startDate: "2026-01-01",
+          endDate: "2026-01-30",
           tasks: [
             {
-              title: "Core Features POC",
-              owner: "POC Development Lead",
+              title: "Create E2E tests",
+              owner: "Sridevi",
               items: [
                 {
-                  text: "Pagination integration",
+                  text: "Playwright setup for the new journey",
                   completed: false,
-                  owner: "Frontend Developer",
+                  owner: "Sridevi",
                 },
                 {
-                  text: "Balance aggregation",
+                  text: "E2E tests for all user flows",
                   completed: false,
-                  owner: "Data Integration Specialist",
+                  owner: "Subbu",
                 },
                 {
-                  text: "Tagging functionality",
+                  text: "Run these tests in CI/CD pipeline",
                   completed: false,
-                  owner: "Feature Developer",
+                  owner: "Abdul",
                 },
                 {
-                  text: "Search & filtering system",
+                  text: "Visual tests wherever required",
                   completed: false,
-                  owner: "Search Engineer",
+                  owner: "Abdul",
                 },
               ],
             },
+          ],
+          dependencies: ["No dependencies"],
+        },
+        {
+          id: 7,
+          title: "Integrate with real APIs & Final Testing",
+          requiresApproval: false,
+          startDate: "2026-02-01",
+          endDate: "2026-02-28",
+          tasks: [
             {
-              title: "Performance & Scalability",
-              owner: "Performance Team Lead",
+              title: "Integrate with real APIs",
+              owner: "Sridevi",
               items: [
                 {
-                  text: "User experience optimization",
+                  text: "Do manual testing with real APIs",
                   completed: false,
-                  owner: "UX Engineer",
+                  owner: "Sridevi",
                 },
                 {
-                  text: "System scaling approach",
+                  text: "Accessibility testing",
                   completed: false,
-                  owner: "DevOps Engineer",
-                },
-                {
-                  text: "Maximize real-time data without UX impact",
-                  completed: false,
-                  owner: "Performance Optimization Team",
+                  owner: "Abdul",
                 },
               ],
             },
           ],
-          dependencies: [
-            "Backend APIs: Fully implemented pagination and data endpoints",
-            "Performance Testing: Infrastructure for load testing and optimization",
-          ],
+          dependencies: ["QA Team: Final testing and sign-off"],
         },
       ];
 
@@ -788,17 +741,7 @@
         {
           title: "Risk Mitigation",
           content:
-            "Milestones 1 and 4 require principal approvals - plan buffer time for review cycles and potential iterations.",
-        },
-        {
-          title: "Technical Debt",
-          content:
-            "Balance new journey development with maintenance of existing systems during the transition period.",
-        },
-        {
-          title: "Testing Strategy",
-          content:
-            "Implement comprehensive testing at each milestone to ensure stability and prevent regression.",
+            "Milestone 1 require principal approvals - plan buffer time for review cycles and potential iterations.",
         },
       ];
 
@@ -886,7 +829,6 @@
             </h3>
             <div class="milestone-meta">
               <div class="milestone-date">📅 ${startDate} - ${endDate}</div>
-              <div class="milestone-owner">👥 ${milestone.owner}</div>
             </div>
             <div class="tasks">${tasksHTML}</div>
             <div class="dependencies info-section">
