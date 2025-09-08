@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Commercial Banking Front-end Milestones</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        font-weight: 300;
+      }
+
+      .header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .milestone-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        position: relative;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 50px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(to bottom, #3498db, #9b59b6);
+        border-radius: 2px;
+      }
+
+      .milestone {
+        position: relative;
+        margin-left: 80px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .milestone:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      .milestone-number {
+        position: absolute;
+        left: -65px;
+        top: 20px;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #3498db, #2c3e50);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2em;
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+      }
+
+      .milestone-title {
+        color: #2c3e50;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .approval-required {
+        display: inline-block;
+        background: #e74c3c;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        margin-left: 15px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .tasks {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .task {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #3498db;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .task h4 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+
+      .task ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .task li {
+        padding: 5px 0;
+        color: #555;
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .task li:hover {
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding-right: 10px;
+      }
+
+      .task li input[type="checkbox"] {
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #27ae60;
+      }
+
+      .task li.completed {
+        color: #27ae60;
+        text-decoration: line-through;
+        opacity: 0.8;
+      }
+
+      .task li.completed:before {
+        content: "✅";
+        position: absolute;
+        right: -25px;
+        top: 5px;
+        font-size: 16px;
+      }
+
+      /* Consolidated Progress Bar Styles */
+      .milestone-progress {
+        margin-top: 20px;
+        padding: 15px;
+        background: #e8f5e8;
+        border-radius: 8px;
+        border-left: 4px solid #27ae60;
+        transition: all 0.3s ease;
+      }
+
+      .milestone-progress.warning {
+        background: #fff3cd;
+        border-left-color: #ffc107;
+      }
+
+      .milestone-progress.success {
+        background: #d4edda;
+        border-left-color: #28a745;
+      }
+
+      .progress-text {
+        font-weight: bold;
+        color: #27ae60;
+        margin-bottom: 5px;
+      }
+
+      .progress-bar {
+        background: #e9ecef;
+        height: 8px;
+        border-radius: 4px;
+        margin: 10px 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        background: linear-gradient(90deg, #6c757d, #adb5bd);
+        height: 100%;
+        transition: width 1s ease;
+        width: 0%;
+      }
+
+      .progress-fill.warning {
+        background: linear-gradient(90deg, #ffc107, #fd7e14);
+      }
+
+      .progress-fill.success {
+        background: linear-gradient(90deg, #28a745, #20c997);
+      }
+
+      /* Common section styles */
+      .info-section {
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .dependencies {
+        background: #fff3cd;
+        border: 2px solid #ffc107;
+      }
+
+      .stakeholders {
+        background: #d1ecf1;
+        border: 2px solid #bee5eb;
+      }
+
+      .notes-section {
+        background: #d4edda;
+        border: 2px solid #c3e6cb;
+        padding: 25px;
+        margin-top: 40px;
+      }
+
+      .section-header {
+        margin-bottom: 15px;
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+      }
+
+      .dependencies .section-header {
+        color: #856404;
+      }
+
+      .stakeholders .section-header {
+        color: #0c5460;
+      }
+
+      .notes-section h3 {
+        color: #155724;
+        margin-bottom: 15px;
+        font-size: 1.4em;
+      }
+
+      .section-header:before {
+        margin-right: 10px;
+        font-size: 1.3em;
+      }
+
+      .dependencies .section-header:before {
+        content: "⚠️";
+      }
+      .stakeholders .section-header:before {
+        content: "👥";
+      }
+
+      .dependency-item,
+      .note-item {
+        background: white;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .dependency-item {
+        border-left: 4px solid #ffc107;
+      }
+
+      .note-item {
+        border-left: 4px solid #28a745;
+      }
+
+      .stakeholder-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .stakeholder-tag {
+        background: #17a2b8;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+      }
+
+      .milestone-meta {
+        display: flex;
+        gap: 20px;
+        margin: 15px 0;
+        flex-wrap: wrap;
+      }
+
+      .milestone-date,
+      .milestone-owner {
+        background: #f8f9fa;
+        padding: 8px 15px;
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+
+      .milestone-date {
+        color: #495057;
+        border-color: #6f42c1;
+        background: #f8f9ff;
+      }
+
+      .milestone-owner {
+        color: #495057;
+        border-color: #20c997;
+        background: #f0fff8;
+      }
+
+      .task-owner {
+        font-size: 0.8em;
+        color: #6c757d;
+        font-style: italic;
+        margin-top: 5px;
+      }
+
+      @media (max-width: 768px) {
+        .milestone {
+          margin-left: 20px;
+        }
+
+        .milestone-number {
+          left: -30px;
+          width: 40px;
+          height: 40px;
+          font-size: 1em;
+        }
+
+        .timeline-line {
+          left: -10px;
+        }
+
+        .tasks {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🏦 Commercial Banking Frontend</h1>
+        <p>Milestones, Dependencies & Implementation Roadmap</p>
+      </div>
+
+      <div class="content">
+        <div class="milestone-container" id="milestone-container">
+          <div class="timeline-line"></div>
+          <!-- Milestones will be generated by JavaScript -->
+        </div>
+
+        <div class="stakeholders info-section">
+          <h4 class="section-header">
+            Key Stakeholders & Continuous Collaboration
+          </h4>
+          <div class="stakeholder-tags" id="stakeholder-tags">
+            <!-- Stakeholder tags will be generated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="notes-section">
+          <h3>📝 Important Notes & Considerations</h3>
+          <div id="notes-container">
+            <!-- Notes will be generated by JavaScript -->
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #666">
+          <p>
+            <strong>Project Timeline:</strong> 6 Major Milestones (Jul 2025 -
+            Mar 2026) | <strong>Critical Path:</strong> Approvals → Architecture
+            → Implementation → Optimization | <strong>Duration:</strong> ~8
+            months
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Data-driven approach
+      const milestoneData = [
+        {
+          id: 1,
+          title: "Plan for new Journey with standardized UX",
+          requiresApproval: true,
+          startDate: "2025-07-22",
+          endDate: "2025-08-08",
+          owner: "Frontend Architecture Team",
+          tasks: [
+            {
+              title: "First steps",
+              owner: "Senior Frontend Developer",
+              items: [
+                {
+                  text: "Create new journey POC",
+                  completed: true,
+                  owner: "Alex Chen",
+                },
+                {
+                  text: "Document the new journey framework",
+                  completed: false,
+                  owner: "Sarah Johnson",
+                },
+                {
+                  text: "Present and get feedback on the new approach",
+                  completed: false,
+                  owner: "Mike Rodriguez",
+                },
+                {
+                  text: "Finalize and create the new journey",
+                  completed: false,
+                  owner: "Frontend Architecture Team",
+                },
+              ],
+            },
+            {
+              title: "Other unknowns",
+              owner: "Product Team Lead",
+              items: [
+                {
+                  text: "How to restrict access to commercial banking features for business users?",
+                  completed: false,
+                  owner: "Security Team",
+                },
+                {
+                  text: "For new RFFs should we implement in both repos?",
+                  completed: false,
+                  owner: "DevOps Lead",
+                },
+                {
+                  text: "Deprecation process for old journeys",
+                  completed: false,
+                  owner: "Product Manager",
+                },
+                {
+                  text: "Dual journey maintenance plan",
+                  completed: false,
+                  owner: "Tech Lead",
+                },
+                {
+                  text: "Should we publish before 1.0.0?",
+                  completed: false,
+                  owner: "Release Manager",
+                },
+              ],
+            },
+          ],
+          dependencies: [
+            "Principal Approvals: Architecture decisions, release strategy, and journey approach",
+          ],
+        },
+        {
+          id: 2,
+          title: "New Journey Creation",
+          requiresApproval: false,
+          startDate: "2025-08-16",
+          endDate: "2025-08-22",
+          owner: "Frontend Development Team",
+          tasks: [
+            {
+              title: "Journey Development",
+              owner: "Lead Frontend Developer",
+              items: [
+                {
+                  text: "Implement journey framework with all 3 segments and routing",
+                  completed: false,
+                  owner: "Emma Wilson",
+                },
+                {
+                  text: "Implement for a simple page like detail page (mock data)",
+                  completed: false,
+                  owner: "David Park",
+                },
+                {
+                  text: "Test manually and verify, passing segment in routing is changing the views",
+                  completed: false,
+                  owner: "QA Team",
+                },
+                {
+                  text: "Find and fix edge cases",
+                  completed: false,
+                  owner: "Frontend Team",
+                },
+              ],
+            },
+            {
+              title: "Testing strategy and setup",
+              owner: "QA Engineer",
+              items: [
+                {
+                  text: "Create testing framework, and write segment specific tests for the detail page",
+                  completed: false,
+                  owner: "Lisa Thompson",
+                },
+              ],
+            },
+          ],
+          dependencies: [
+            "Milestone 1 Completion: Approved architecture and journey approach",
+          ],
+        },
+        {
+          id: 3,
+          title: "Configuration Implementation",
+          requiresApproval: false,
+          startDate: "2025-10-01",
+          endDate: "2025-10-31",
+          owner: "UX/Frontend Team",
+          tasks: [
+            {
+              title: "Config Creation",
+              owner: "Configuration Specialist",
+              items: [
+                {
+                  text: "Go through the designs and create configurations for each segment",
+                  completed: false,
+                  owner: "Frontend Team & Gio (UX)",
+                },
+              ],
+            },
+          ],
+          dependencies: [
+            "Journey Framework: Completed multi-segment journey from Milestone 2",
+            "UX Design: Commercial banking UI and UX standardization specifications from Gio",
+          ],
+        },
+        {
+          id: 4,
+          title: "Architecture Deep Dive",
+          requiresApproval: true,
+          startDate: "2025-11-01",
+          endDate: "2025-12-15",
+          owner: "Principal Engineers",
+          tasks: [
+            {
+              title: "System Design",
+              owner: "System Architect",
+              items: [
+                {
+                  text: "State management",
+                  completed: false,
+                  owner: "React Specialist",
+                },
+                {
+                  text: "Caching strategy",
+                  completed: false,
+                  owner: "Performance Engineer",
+                },
+                {
+                  text: "Performance optimization (Lazy loading etc.)",
+                  completed: false,
+                  owner: "Performance Team",
+                },
+                {
+                  text: "Scalability framework (non-invasive component extension etc.)",
+                  completed: false,
+                  owner: "Architecture Team",
+                },
+                {
+                  text: "Route guards and access control",
+                  completed: false,
+                  owner: "Security Engineer",
+                },
+              ],
+            },
+            {
+              title: "Component Architecture",
+              owner: "UI/UX Developer",
+              items: [
+                {
+                  text: "Create a list of new components required to support commercial view",
+                  completed: false,
+                  owner: "Component Library Team",
+                },
+                {
+                  text: "Which libraries or styling approaches will be used for each component?",
+                  completed: false,
+                  owner: "Design System Team",
+                },
+                {
+                  text: "Location of the component (Design System vs Our journey)",
+                  completed: false,
+                  owner: "Architecture Review Board",
+                },
+              ],
+            },
+          ],
+          dependencies: [
+            "Principal Approval: Frontend system design and component architecture decisions",
+          ],
+        },
+        {
+          id: 5,
+          title: "Pagination & Data Strategy",
+          requiresApproval: false,
+          startDate: "2025-12-16",
+          endDate: "2026-01-31",
+          owner: "Backend Integration Team",
+          tasks: [
+            {
+              title: "Pagination Implementation",
+              owner: "API Integration Lead",
+              items: [
+                {
+                  text: "Finalize all the different APIs needed for each page",
+                  completed: false,
+                  owner: "Backend Team Lead",
+                },
+                {
+                  text: "Collect mock json for each API",
+                  completed: false,
+                  owner: "API Designer",
+                },
+                {
+                  text: "Define pagination behavior",
+                  completed: false,
+                  owner: "Frontend Lead",
+                },
+              ],
+            },
+            {
+              title: "Data Requirements",
+              owner: "Data Engineer",
+              items: [
+                {
+                  text: "APIs called for each minor action",
+                  completed: false,
+                  owner: "Backend Developer",
+                },
+                {
+                  text: "Caching requirements",
+                  completed: false,
+                  owner: "Performance Engineer",
+                },
+                {
+                  text: "Real-time data sync strategy",
+                  completed: false,
+                  owner: "WebSocket Specialist",
+                },
+                {
+                  text: "Error handling and fallbacks",
+                  completed: false,
+                  owner: "Reliability Engineer",
+                },
+              ],
+            },
+          ],
+          dependencies: [
+            "Backend Team: APIs used for each FE requirements",
+            "Architecture: Approved BE system design",
+          ],
+        },
+        {
+          id: 6,
+          title: "POC & Optimization",
+          requiresApproval: false,
+          startDate: "2026-02-01",
+          endDate: "2026-03-31",
+          owner: "Full Stack Team",
+          tasks: [
+            {
+              title: "Core Features POC",
+              owner: "POC Development Lead",
+              items: [
+                {
+                  text: "Pagination integration",
+                  completed: false,
+                  owner: "Frontend Developer",
+                },
+                {
+                  text: "Balance aggregation",
+                  completed: false,
+                  owner: "Data Integration Specialist",
+                },
+                {
+                  text: "Tagging functionality",
+                  completed: false,
+                  owner: "Feature Developer",
+                },
+                {
+                  text: "Search & filtering system",
+                  completed: false,
+                  owner: "Search Engineer",
+                },
+              ],
+            },
+            {
+              title: "Performance & Scalability",
+              owner: "Performance Team Lead",
+              items: [
+                {
+                  text: "User experience optimization",
+                  completed: false,
+                  owner: "UX Engineer",
+                },
+                {
+                  text: "System scaling approach",
+                  completed: false,
+                  owner: "DevOps Engineer",
+                },
+                {
+                  text: "Maximize real-time data without UX impact",
+                  completed: false,
+                  owner: "Performance Optimization Team",
+                },
+              ],
+            },
+          ],
+          dependencies: [
+            "Backend APIs: Fully implemented pagination and data endpoints",
+            "Performance Testing: Infrastructure for load testing and optimization",
+          ],
+        },
+      ];
+
+      const stakeholders = [
+        "Transaction Team",
+        "Employee App Team",
+        "Dashboard Journey Team",
+        "Gio (UX)",
+        "Backend Team",
+        "Principals",
+      ];
+
+      const notes = [
+        {
+          title: "Continuous Stakeholder Engagement",
+          content:
+            "Keep transaction team, employee app, and dashboard journey teams in the loop throughout all milestones to ensure alignment and prevent integration issues.",
+        },
+        {
+          title: "UX Collaboration",
+          content:
+            "Maintain constant contact with Gio for UX-related queries, design validation, and user experience optimization.",
+        },
+        {
+          title: "Risk Mitigation",
+          content:
+            "Milestones 1 and 4 require principal approvals - plan buffer time for review cycles and potential iterations.",
+        },
+        {
+          title: "Technical Debt",
+          content:
+            "Balance new journey development with maintenance of existing systems during the transition period.",
+        },
+        {
+          title: "Testing Strategy",
+          content:
+            "Implement comprehensive testing at each milestone to ensure stability and prevent regression.",
+        },
+      ];
+
+      // Utility functions
+      function createProgressBar(taskIndex, milestoneId, progress = 0) {
+        const progressClass =
+          progress === 0 ? "" : progress >= 100 ? "success" : "warning";
+        return `
+          <div class="milestone-progress ${progressClass}">
+            <div class="progress-text">
+              Progress: <span class="progress-value">${progress}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill ${progressClass}" style="width: ${progress}%"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      function createTaskHTML(task, taskIndex, milestoneId) {
+        const taskItems = task.items
+          .map(
+            (item) =>
+              `<li>
+            <input type="checkbox" ${
+              item.completed ? "checked" : ""
+            } onchange="toggleComplete(this)" />
+            ${item.text}
+            <div class="task-owner">👤 ${item.owner}</div>
+          </li>`
+          )
+          .join("");
+
+        const completedCount = task.items.filter(
+          (item) => item.completed
+        ).length;
+        const progress = Math.round((completedCount / task.items.length) * 100);
+
+        return `
+          <div class="task">
+            <h4>${task.title}</h4>
+            <ul>${taskItems}</ul>
+            ${createProgressBar(taskIndex, milestoneId, progress)}
+          </div>
+        `;
+      }
+
+      function createMilestoneHTML(milestone) {
+        const tasksHTML = milestone.tasks
+          .map((task, index) => createTaskHTML(task, index, milestone.id))
+          .join("");
+
+        const dependenciesHTML = milestone.dependencies
+          .map((dep) => `<div class="dependency-item">${dep}</div>`)
+          .join("");
+
+        const approvalBadge = milestone.requiresApproval
+          ? '<span class="approval-required">🔴 APPROVAL REQUIRED</span>'
+          : "";
+
+        // Format dates
+        const startDate = new Date(milestone.startDate).toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          }
+        );
+        const endDate = new Date(milestone.endDate).toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          }
+        );
+
+        return `
+          <div class="milestone" data-milestone-id="${milestone.id}">
+            <div class="milestone-number" data-milestone="${milestone.id}">${milestone.id}</div>
+            <h3 class="milestone-title">
+              ${milestone.title}
+              ${approvalBadge}
+            </h3>
+            <div class="milestone-meta">
+              <div class="milestone-date">📅 ${startDate} - ${endDate}</div>
+              <div class="milestone-owner">👥 ${milestone.owner}</div>
+            </div>
+            <div class="tasks">${tasksHTML}</div>
+            <div class="dependencies info-section">
+              <h4 class="section-header">Dependencies</h4>
+              ${dependenciesHTML}
+            </div>
+          </div>
+        `;
+      }
+
+      // Initialize page
+      function initializePage() {
+        // Generate milestones
+        const container = document.getElementById("milestone-container");
+        const milestonesHTML = milestoneData
+          .map((milestone) => createMilestoneHTML(milestone))
+          .join("");
+        container.innerHTML =
+          '<div class="timeline-line"></div>' + milestonesHTML;
+
+        // Generate stakeholders
+        const stakeholderContainer =
+          document.getElementById("stakeholder-tags");
+        stakeholderContainer.innerHTML = stakeholders
+          .map(
+            (stakeholder) => `<div class="stakeholder-tag">${stakeholder}</div>`
+          )
+          .join("");
+
+        // Generate notes
+        const notesContainer = document.getElementById("notes-container");
+        notesContainer.innerHTML = notes
+          .map(
+            (note) =>
+              `<div class="note-item">
+            <strong>${note.title}:</strong> ${note.content}
+          </div>`
+          )
+          .join("");
+
+        // Initialize animations and states
+        initializeAnimations();
+        initializeCompletedItems();
+      }
+
+      // Optimized toggle function
+      function toggleComplete(checkbox) {
+        const listItem = checkbox.parentElement;
+        listItem.classList.toggle("completed", checkbox.checked);
+
+        // Update progress for this task
+        updateTaskProgress(checkbox.closest(".task"));
+      }
+
+      // Optimized progress update function
+      function updateTaskProgress(taskContainer) {
+        const checkboxes = taskContainer.querySelectorAll(
+          'input[type="checkbox"]'
+        );
+        const checkedBoxes = taskContainer.querySelectorAll(
+          'input[type="checkbox"]:checked'
+        );
+        const progress = Math.round(
+          (checkedBoxes.length / checkboxes.length) * 100
+        );
+
+        // Update progress display
+        const progressValue = taskContainer.querySelector(".progress-value");
+        const progressFill = taskContainer.querySelector(".progress-fill");
+        const progressContainer = taskContainer.querySelector(
+          ".milestone-progress"
+        );
+
+        if (progressValue && progressFill && progressContainer) {
+          progressValue.textContent = progress + "%";
+          progressFill.style.width = progress + "%";
+
+          // Update classes based on progress
+          const oldClasses = ["warning", "success"];
+          progressContainer.classList.remove(...oldClasses);
+          progressFill.classList.remove(...oldClasses);
+
+          if (progress === 100) {
+            progressContainer.classList.add("success");
+            progressFill.classList.add("success");
+          } else if (progress >= 50) {
+            progressContainer.classList.add("warning");
+            progressFill.classList.add("warning");
+          }
+        }
+
+        // Update milestone progress
+        updateMilestoneProgress(taskContainer.closest(".milestone"));
+      }
+
+      // Optimized milestone progress update
+      function updateMilestoneProgress(milestone) {
+        const allCheckboxes = milestone.querySelectorAll(
+          'input[type="checkbox"]'
+        );
+        const allChecked = milestone.querySelectorAll(
+          'input[type="checkbox"]:checked'
+        );
+        const overallProgress = Math.round(
+          (allChecked.length / allCheckboxes.length) * 100
+        );
+
+        const milestoneNumber = milestone.querySelector(".milestone-number");
+        const originalNumber = milestoneNumber.getAttribute("data-milestone");
+
+        // Update milestone number styling
+        if (overallProgress === 100) {
+          milestoneNumber.style.background =
+            "linear-gradient(135deg, #28a745, #20c997)";
+          milestoneNumber.innerHTML = "✓";
+        } else if (overallProgress >= 50) {
+          milestoneNumber.style.background =
+            "linear-gradient(135deg, #ffc107, #fd7e14)";
+          milestoneNumber.innerHTML = originalNumber;
+        } else {
+          milestoneNumber.style.background =
+            "linear-gradient(135deg, #3498db, #2c3e50)";
+          milestoneNumber.innerHTML = originalNumber;
+        }
+      }
+
+      // Initialize animations
+      function initializeAnimations() {
+        const milestones = document.querySelectorAll(".milestone");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = "0";
+                entry.target.style.transform = "translateY(50px)";
+                setTimeout(() => {
+                  entry.target.style.transition = "all 0.6s ease";
+                  entry.target.style.opacity = "1";
+                  entry.target.style.transform = "translateY(0)";
+                }, 100);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        milestones.forEach((milestone) => observer.observe(milestone));
+      }
+
+      // Initialize completed items
+      function initializeCompletedItems() {
+        document
+          .querySelectorAll('input[type="checkbox"]')
+          .forEach((checkbox) => {
+            if (checkbox.checked) {
+              checkbox.parentElement.classList.add("completed");
+            }
+
+            const taskContainer = checkbox.closest(".task");
+            updateTaskProgress(taskContainer);
+          });
+      }
+
+      // Initialize page when DOM is loaded
+      document.addEventListener("DOMContentLoaded", initializePage);
+    </script>
+  </body>
+</html>
